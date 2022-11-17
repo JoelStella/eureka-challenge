@@ -19,6 +19,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.24'
 	annotationProcessor 'org.projectlombok:lombok:1.18.24'
 	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.4'
+	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '8.0.0.Final'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testCompileOnly 'org.projectlombok:lombok:1.18.24'
