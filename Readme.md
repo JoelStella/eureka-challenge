@@ -7,7 +7,7 @@ Challenge for Eurekalabs
 
 ### To start the application locally ###
 
-* Create a postgres database named __wchallenge_db__
+* Create a postgres database named __eurekalabs-challenge__
 * Set the following environment variables: __JWT_KEY__, __STOCK_API_KEY__, __DB_USERNAME__, __DB_PASSWORD__
 
 ### To test the app ###
