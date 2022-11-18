@@ -1,7 +1,7 @@
 package io.eurekalabs.challenge.config.security;
 
+import io.eurekalabs.challenge.adapter.repository.UserRepository;
 import java.util.ArrayList;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,16 +10,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 
+    private final UserRepository userRepository;
+
+    public JwtUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //Mock user to test API
-        if ("randomuser123".equals(username)) {
-            return new User("randomuser123",
-                    "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6",
-                    new ArrayList<>()
-            );
-        } else {
-            throw new UsernameNotFoundException("User not found with username: " + username);
-        }
+        var user = userRepository.findByUserName(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found: " + username));
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getUserName(), user.getPassword(), new ArrayList<>()
+        );
     }
 }

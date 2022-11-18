@@ -29,8 +29,14 @@ public class UserDto {
     public static UserDto fromDomain(User user) {
         return UserDto.builder()
                 .userName(user.getUserName())
-                .password(user.getPassword())
                 .token(user.getToken())
+                .build();
+    }
+
+    public static User toDomain(UserDto userDto) {
+        return User.builder()
+                .userName(userDto.getUserName())
+                .password(userDto.getPassword())
                 .build();
     }
 
